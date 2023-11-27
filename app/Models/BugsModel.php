@@ -3,11 +3,17 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
+/*
+    This is the model class
+*/
+
 class BugsModel extends Model{
 
     protected $db;
     protected $table;
     
+
+    // Setup database connection
     public function __construct(){
        $this->db = \Config\Database::connect();
        $this->table = 'bugs'; 
@@ -62,7 +68,7 @@ class BugsModel extends Model{
                 return $response;
             }
 
-            
+        // When an exception is thrown an error will be returned
         }catch(Exception $e){
             $response["status"] = false;
             $response["message"] = "Error inserting bug";

@@ -8,27 +8,32 @@ use \CodeIgniter\Controller;
 use \CodeIgniter\RESTful\ResourceController;
 use App\Models\BugsModel;
 
+
+// This is the controller class in order to manage HTTP/HTTPS requests
 class Bugs extends ResourceController
 {
     
-    // Return all bugs registered in the main view
+    // This is the default index page
     public function index(){
 
         $bugs_model = new BugsModel();
         $all_bugs = $bugs_model->list();
         
+        // Defining frontend page title based on environment
         $title = (ENVIRONMENT === 'development') ? SITE_TITLE . " - " . ENVIRONMENT . " | API VERSION: " . API_VERSION : SITE_TITLE;
         $data = array();
         $data["title"] = $title;
         $data["bugs"] = $all_bugs["bugs"];
         $data["api_version"] = (ENVIRONMENT === 'development') ? "API VERSION: " . API_VERSION : "";
         
+        //Load view
         return view('welcome', $data);  
     }
     
-    // Return all bugs registered
-    // Optional input parameter: 'query'
-    // With 'query' parameter will be returned all bugs by fulltext search query
+    /* API that returns all registered bugs 
+       Optional input parameter: 'query'
+       'query' parameter is used to do fulltext queries 
+    */
     public function list(){
 
         $bugs_model = new BugsModel();
@@ -44,10 +49,11 @@ class Bugs extends ResourceController
     public function add(){
         
         
-        //Set a validation control in order to fetch all the mandatory fields
-        // reporter_first_name
-        // reporter_last_name
-        // bug_description
+        /* Set a validation control in order to fetch all the mandatory fields
+        reporter_first_name
+        reporter_last_name
+        bug_description 
+        */
         $validation =  \Config\Services::validation();
         $validation->setRules([
                 'reporter_first_name' => 'required',
@@ -56,7 +62,7 @@ class Bugs extends ResourceController
                     
         ]);
 
-
+        // If all fields are fullfilled the bug can be stored
         if($validation->withRequest($this->request)->run()){
 
             $bugs_model = new BugsModel();
