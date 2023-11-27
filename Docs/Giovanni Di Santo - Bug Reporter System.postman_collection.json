@@ -1,0 +1,153 @@
+{
+	"info": {
+		"_postman_id": "6a0f5455-f736-4bbf-9b59-4e9f6b27d829",
+		"name": "Giovanni Di Santo - Bug Reporter System",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "14285469"
+	},
+	"item": [
+		{
+			"name": "Dev environment",
+			"item": [
+				{
+					"name": "Register a new bug",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"reporter_first_name\": \"Mario\",\r\n    \"reporter_last_name\": \"Rossi\",\r\n    \"bug_description\": \"fake bug\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{dev_url}}api/bugs/add",
+							"host": [
+								"{{dev_url}}api"
+							],
+							"path": [
+								"bugs",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Bug list",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "query",
+									"value": "fake",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{dev_url}}api/bugs",
+							"host": [
+								"{{dev_url}}api"
+							],
+							"path": [
+								"bugs"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "PROD environment",
+			"item": [
+				{
+					"name": "Register a new bug",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"reporter_first_name\": \"Giovanni\",\r\n    \"reporter_last_name\": \"Verdi\",\r\n    \"bug_description\": \"Bad bug\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{prod_url}}api/bugs/add",
+							"host": [
+								"{{prod_url}}api"
+							],
+							"path": [
+								"bugs",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Bug list",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{prod_url}}api/bugs",
+							"host": [
+								"{{prod_url}}api"
+							],
+							"path": [
+								"bugs"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "dev_url",
+			"value": "http://localhost/",
+			"type": "string"
+		},
+		{
+			"key": "prod_url",
+			"value": "https://bug-reporter-management.ew.r.appspot.com/",
+			"type": "string"
+		}
+	]
+}
