@@ -17,7 +17,7 @@ class Bugs extends ResourceController
         $bugs_model = new BugsModel();
         $all_bugs = $bugs_model->list();
         
-        $title = SITE_TITLE . " - " . ENVIRONMENT;
+        $title = (ENVIRONMENT === 'development') ? SITE_TITLE . " - " . ENVIRONMENT . " | API VERSION: " . API_VERSION : SITE_TITLE;
         $data = array();
         $data["title"] = $title;
         $data["bugs"] = $all_bugs["bugs"];
