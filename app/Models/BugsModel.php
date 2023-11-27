@@ -27,6 +27,12 @@ class BugsModel extends Model{
         if(ENVIRONMENT === 'development'){
             $result["api_version"] = API_VERSION;
         }
+
+        foreach($bugs as $key => $value){
+
+            $bugs[$key]->creation_date = date("d-m-Y H:i:s", strtotime($bugs[$key]->creation_date));
+        }
+
         $result["bugs"] = $bugs;
         
         return $result;
