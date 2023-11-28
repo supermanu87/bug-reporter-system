@@ -43,7 +43,7 @@ This is the production endpoint:
 
 https://bug-reporter-management.ew.r.appspot.com/
 
-## Use Stories
+## User Stories
 
 User Story #1
 
